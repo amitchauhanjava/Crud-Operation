@@ -3,15 +3,19 @@ package com.crud.service;
 import com.crud.entity.User;
 import org.springframework.data.domain.Page;
 
-public interface UserService {
+import java.util.List;
+import java.util.Optional;
 
+public interface UserService {
 
     Page<User> getAllUsers(String search, int page, int size, String sortBy, String sortDir);
 
     public User saveUser(User user);
 
-    public void findById(Long Id);
+    public Optional<User> findUserById(Long Id);
 
-    public User deleteUser(Long Id);
+    public List<User> findById(List<Long> Id);
+
+    public void deleteUser(Long Id);
 
 }

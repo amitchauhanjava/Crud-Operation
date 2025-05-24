@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,15 @@ public class UserSeriveImpl implements UserService {
     private UserRepository userRepository;
 
 
+    /**
+     * Retrieve data with searching sorting etc.
+     * @param search
+     * @param page
+     * @param size
+     * @param sortBy
+     * @param sortDir
+     * @return
+     */
     @Override
     public Page<User> getAllUsers(String search, int page, int size, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
@@ -28,6 +38,11 @@ public class UserSeriveImpl implements UserService {
                 : userRepository.findByNameContainingIgnoreCase(search, pageable);
     }
 
+    /**
+     * Save and Update User
+     * @param user
+     * @return
+     */
     @Override
     public User saveUser(User user) {
         if (user.getId() != null) {
@@ -46,13 +61,33 @@ public class UserSeriveImpl implements UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Find user by id
+     * @param Id
+     * @return
+     */
     @Override
-    public void findById(Long Id) {
-
+    public Optional<User> findUserById(Long Id) {
+        return userRepository.findById(Id);
     }
 
+    /**
+     * Retrieve all by Id
+     * @param Id
+     * @return
+     */
     @Override
-    public User deleteUser(Long Id) {
-        return null;
+    public List<User> findById(List<Long> Id) {
+        return userRepository.findAllById(Id);
+    }
+
+    /**
+     * Delete By Id
+     * @param Id
+     * @return
+     */
+    @Override
+    public void deleteUser(Long Id) {
+        userRepository.deleteById(Id);
     }
 }
