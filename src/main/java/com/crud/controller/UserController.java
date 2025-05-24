@@ -77,4 +77,14 @@ public class UserController {
         userService.deleteUser(Id);
         return ResponseEntity.ok("User with "+Id+" Deleted Successfully");
     }
+
+    /**
+     * All API endpoints
+     *
+     * 1. Save -> http://localhost:8088/api/user/save
+     * 2. List -> http://localhost:8088/api/user/list?search=Amit&page=0&size=10&sortBy=mobile&sortDir=asc
+     * 3. Find By Multiple Ids -> http://localhost:8088/api/user/3,1,12,4,7
+     * 4. Find By Id -> http://localhost:8088/api/user/retrieve/2
+     * 5. Delete User By Id -> http://localhost:8088/api/user/19
+     */
 }
